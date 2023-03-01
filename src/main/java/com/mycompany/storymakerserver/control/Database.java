@@ -201,7 +201,7 @@ public class Database {
             conn = DriverManager.getConnection("jdbc:h2:./resources/db/user", dbprops);
             stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT story.id, title, description, score, nScore, date, username FROM story INNER JOIN user ON story.idAuthor = user.id");
-            while (rs.next()) {
+            while (rs.next()) {                
                 storyList.getStory().add(new Story(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getDate(6), rs.getString(7)));
             }
             rs.close();
@@ -251,7 +251,19 @@ public class Database {
         return storyInfo;
     }
     
-
-    
+    public void deleteStoryByTitle(String title){
+        StoryList storyList = new StoryList();
+        try {
+            conn = DriverManager.getConnection("jdbc:h2:./resources/db/user", dbprops);
+            PreparedStatement pstm = conn.prepareStatement("DELETE FROM story WHERE title = ?");            
+            pstm.setString(1, title);
+            pstm.executeUpdate();
+            pstm.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      
 
 }

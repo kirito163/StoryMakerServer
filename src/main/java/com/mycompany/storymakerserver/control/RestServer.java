@@ -119,6 +119,8 @@ public class RestServer {
                         file.delete();
                     } else if (Files.isFileNameConfermed(tokens.get(1))) {
                         File file = new File(dirStoryConfermed + tokens.get(1) + extension);
+                        Database d = new Database();
+                        d.deleteStoryByTitle(tokens.get(1));
                         file.delete();
                     }
                     System.out.println("story deleted");
