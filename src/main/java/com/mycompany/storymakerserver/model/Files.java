@@ -26,8 +26,8 @@ public class Files {
     public static boolean isFileNameReceved(String nomeFile) { // look if there is a file with the string parameter in the directory
         File dir = new File(dirStoryReceved);
         File[] listFiles = dir.listFiles();
-        for (File f : listFiles) {
-            if (f.getName().equals(nomeFile + extension)) {
+        for (File f : listFiles) {      
+            if (f.getName().equalsIgnoreCase(nomeFile + extension)) {
                 return true;
             }
         }
@@ -38,7 +38,7 @@ public class Files {
         File dir = new File(dirStoryConfermed);
         File[] listFiles = dir.listFiles();
         for (File f : listFiles) {
-            if (f.getName().equals(nomeFile + extension)) {
+            if (f.getName().equalsIgnoreCase(nomeFile + extension)) {
                 return true;
             }
         }
